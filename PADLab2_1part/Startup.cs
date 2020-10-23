@@ -10,7 +10,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using MongoDB.Driver;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using PADLab2_1part.Data;
+using PADLab2_1part.Validation.Extensions;
 
 namespace PADLab2_1part
 {
@@ -31,7 +34,15 @@ namespace PADLab2_1part
                 var uri = s.GetRequiredService<IConfiguration>()["MongoUri"];
                 return new MongoClient(uri);
             });
-            services.AddControllers();
+            services.AddControllers()
+                .AddXmlDataContractSerializerFormatters()
+                .AddNewtonsoftJson(x =>
+            {
+                x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+                x.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
+                x.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            });
+                
             services.AddScoped<IPictureRepo, PictureRepo>();
             services.AddScoped<ILikesRepo, LikesRepo>();
         }
@@ -39,14 +50,22 @@ namespace PADLab2_1part
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
+            //app.ConfigureExceptionHandler();
+
+            // Hook in the global error-handling middleware
+            // app.UseMiddleware(typeof(ErrorHandlingMiddleware));
+            app.UseMiddleware<ErrorHandlingMiddleware>();
+            // Register any middleware to report exceptions to a third-party service *after* our ErrorHandlingMiddleware
+            //app.UseExcepticon();
 
             app.UseRouting();
 
-            app.UseAuthorization();
+           // app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

@@ -1,5 +1,6 @@
 ﻿using MongoDB.Driver;
 using PADLab2_1part.Models;
+using PADLab2_1part.Validation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,24 +17,32 @@ namespace PADLab2_1part.Data
             var database = client.GetDatabase("PicturesDB");
             collectionLikes = database.GetCollection<Like>("Likes");
         }
-        public void AddLike(Like like)
+        public async Task AddLike(Like like)
         {
-            collectionLikes.InsertOne(like);
+            await collectionLikes.InsertOneAsync(like);
         }
 
-        public void DeleteLike(Like like)
+        public async Task DeleteLike(Like like)
         {
-            collectionLikes.DeleteOne(_like=>_like.ImageId==like.ImageId&&_like.UserId==like.UserId);
+            var result = await collectionLikes.DeleteOneAsync(_like => _like.ImageId == like.ImageId && _like.UserId == like.UserId);
+            if (result.DeletedCount == 0)
+            {
+                throw new NotFoundException($"Like not found!");
+            }
+            
         }
 
-        public IEnumerable<string> GetLikesUsers(string id)
+        public async Task<IEnumerable<Guid>> GetLikesUsers(Guid id)
         {
-            return collectionLikes.Find(s=>s.ImageId==id).ToEnumerable().Select(s=>s.UserId);
+            var likesUser = await collectionLikes.FindAsync(s => s.ImageId == id);
+            return likesUser.ToEnumerable().Select(s=>s.UserId);
         }
 
-        public int GetNumberOfLikes(string id)
+        public async Task<LikeCount> GetNumberOfLikes(Guid id)
         {
-            return (int)collectionLikes.Count(s => s.ImageId == id);
+            var count = await collectionLikes.CountDocumentsAsync(s => s.ImageId == id);
+            var count1 = (int)count;
+            return new LikeCount(count1);
         }
     }
 }

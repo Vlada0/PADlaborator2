@@ -65,6 +65,12 @@ C:\Users\Vlada\Documents\PADLab2-master\PADLab2_1part\bin\Release\netcoreapp3.1\
 C:\Users\Vlada\Documents\PADLab2-master\PADLab2_1part\bin\Release\netcoreapp3.1\runtimes\win\native\libzstd.dll
 C:\Users\Vlada\Documents\PADLab2-master\PADLab2_1part\bin\Release\netcoreapp3.1\runtimes\win\native\snappy32.dll
 C:\Users\Vlada\Documents\PADLab2-master\PADLab2_1part\bin\Release\netcoreapp3.1\runtimes\win\native\snappy64.dll
+C:\Users\Vlada\Documents\PADLab2-master\PADLab2_1part\obj\Release\netcoreapp3.1\PADLab2_1part.csproj.CopyComplete
+C:\Users\Vlada\Documents\PADLab2-master\PADLab2_1part\bin\Release\netcoreapp3.1\Newtonsoft.Json.dll
+C:\Users\Vlada\Documents\PADLab2-master\PADLab2_1part\bin\Release\netcoreapp3.1\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\Vlada\Documents\PADLab2-master\PADLab2_1part\bin\Release\netcoreapp3.1\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Users\Vlada\Documents\PADLab2-master\PADLab2_1part\bin\Release\netcoreapp3.1\Newtonsoft.Json.Bson.dll
+C:\Users\Vlada\Documents\PADLab2-master\PADLab2_1part\bin\Release\netcoreapp3.1\System.Net.Http.Formatting.dll
+C:\Users\Vlada\Documents\PADLab2-master\PADLab2_1part\bin\Release\netcoreapp3.1\System.Web.Http.dll
 C:\Users\Vlada\Documents\PADLab2-master\PADLab2_1part\obj\Release\netcoreapp3.1\PADLab2_1part.csproj.CoreCompileInputs.cache
 C:\Users\Vlada\Documents\PADLab2-master\PADLab2_1part\obj\Release\netcoreapp3.1\PADLab2_1part.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\Vlada\Documents\PADLab2-master\PADLab2_1part\obj\Release\netcoreapp3.1\PADLab2_1part.csproj.CopyComplete

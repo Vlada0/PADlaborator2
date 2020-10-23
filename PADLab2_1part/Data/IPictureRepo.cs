@@ -8,10 +8,10 @@ namespace PADLab2_1part.Data
 {
     public interface IPictureRepo
     {
-        IEnumerable<Picture> GetPictures();
-        Picture GetPictureById(string id);
-        Picture CreatePicture(Picture picture);
-        Picture Update(Picture picture);
-        void Delete(string id);
+        Task<IEnumerable<Picture>> GetPictures();
+        Task<Picture> GetPictureById(Guid id);
+        Task<Picture> CreatePicture(Picture picture);
+        Task<Picture> Update(Picture picture);
+        Task Delete(Guid id);
     }
 }

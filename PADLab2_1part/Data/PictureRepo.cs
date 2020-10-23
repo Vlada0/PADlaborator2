@@ -1,10 +1,13 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Driver;
 using PADLab2_1part.Models;
+using PADLab2_1part.Validation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
+using System.Web.Http;
 
 namespace PADLab2_1part.Data
 {
@@ -17,30 +20,42 @@ namespace PADLab2_1part.Data
             var database = client.GetDatabase("PicturesDB");
             collectionPicture = database.GetCollection<Picture>("Pictures");
         }
-        public Picture CreatePicture(Picture picture)
+        public async Task<Picture> CreatePicture(Picture picture)
         {
-            collectionPicture.InsertOne(picture);
+            await collectionPicture.InsertOneAsync(picture);
             return picture;
         }
 
-        public void Delete(string id)
+        public async Task Delete(Guid id)
         {
-            collectionPicture.DeleteOne(picture => picture.Id==id);
+            var result = await collectionPicture.DeleteOneAsync(picture => picture.Id==id);
+            if (result.DeletedCount == 0)
+            {
+                throw new NotFoundException($"Picture with id {id} not found!");
+            }
+
         }
 
-        public Picture GetPictureById(string id)
+        public async Task<Picture> GetPictureById(Guid id)
         {
-            return collectionPicture.Find(picture => picture.Id == id).FirstOrDefault();
+            var picture = await collectionPicture.FindAsync<Picture>(picture => picture.Id == id);
+            var pic = await picture.FirstOrDefaultAsync();
+            if(pic == null)
+            {
+                throw new NotFoundException("Picture not found!");
+            }
+            return pic;
         }
 
-        public IEnumerable<Picture> GetPictures()
+        public async Task<IEnumerable<Picture>> GetPictures()
         {
-            return collectionPicture.Find(new BsonDocument()).ToEnumerable();
+            var pictures = await collectionPicture.FindAsync(new BsonDocument());
+            return pictures.ToEnumerable();
         }
 
-        public Picture Update(Picture picture)
+        public async Task<Picture> Update(Picture picture)
         {
-            collectionPicture.ReplaceOne(_picture => _picture.Id == picture.Id, picture);
+            await collectionPicture.ReplaceOneAsync(_picture => _picture.Id == picture.Id, picture);
             return picture;
         }
     }

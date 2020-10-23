@@ -23,41 +23,41 @@ namespace PADLab2_1part.Controllers
         }
 
         [HttpGet]
-        public ActionResult GetPictures()
+        public async Task<ActionResult> GetPictures()
         {
-            var picturesItems = _repo.GetPictures();
-            Console.WriteLine(picturesItems);
+            var picturesItems = await _repo.GetPictures();
+           // Console.WriteLine(picturesItems);
             return Ok(picturesItems.AsEnumerable()); 
         }
 
         [HttpGet("{id}")]
-        public ActionResult<Picture> GetPicture(string id)
+        public async Task<ActionResult<Picture>> GetPicture(Guid id)
         {
-            var picturesItem = _repo.GetPictureById(id);
-
+            var picturesItem = await _repo.GetPictureById(id);
+  
             return Ok(picturesItem);
         }
 
         [HttpPost]
-        public ActionResult <Picture> Post(Picture picture)
+        public async Task<ActionResult <Picture>> Post(Picture picture)
         {
-            var _picture = _repo.CreatePicture(picture);
+            var _picture = await _repo.CreatePicture(picture);
             return Ok(_picture);
         }
 
         [HttpPut]
-        public ActionResult<Picture> Put(Picture picture)
+        public async Task<ActionResult<Picture>> Put(Picture picture)
         {
-            var _picture = _repo.Update(picture);
+            var _picture = await _repo.Update(picture);
 
             return Ok(_picture);
         }
 
 
         [HttpDelete("{id}")]
-        public ActionResult<Picture> Delete(string id)
+        public async Task<ActionResult<Picture>> Delete(Guid id)
         {
-             _repo.Delete(id);
+            await _repo.Delete(id);
 
             return NoContent();
         }

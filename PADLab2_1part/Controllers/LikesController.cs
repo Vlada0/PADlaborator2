@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using PADLab2_1part.Data;
 using PADLab2_1part.Models;
 
+using Microsoft.Extensions.Logging;
+
 namespace PADLab2_1part.Controllers
 {
     [Route("api/[controller]")]
@@ -20,31 +22,31 @@ namespace PADLab2_1part.Controllers
             _repo = repo;
         }
 
-        [HttpGet]
-        public ActionResult<LikeCount> getLikes(string id)
+        [HttpGet("{id}")]
+        public async Task<ActionResult<LikeCount>> getLikes(Guid id)
         {
-            var likesItems = _repo.GetNumberOfLikes(id);
+            var likesItems = await _repo.GetNumberOfLikes(id);
             return Ok(likesItems);
         }
 
         [HttpGet("{id}/users")]
-        public ActionResult<IEnumerable<User>> getLikesUsers(string id)
+        public async Task<ActionResult<IEnumerable<User>>> getLikesUsers(Guid id)
         {
-            var likesItems = _repo.GetLikesUsers(id);
+            var likesItems = await _repo.GetLikesUsers(id);
             return Ok(likesItems.AsEnumerable());
         }
 
         [HttpPost]
-        public ActionResult addLike(Like like)
+        public async Task<ActionResult> addLike(Like like)
         {
-            _repo.AddLike(like);
+            await _repo.AddLike(like);
             return NoContent();
         }
 
         [HttpDelete]
-        public ActionResult removeLike(Like like)
+        public async Task<ActionResult> removeLike(Like like)
         {
-            _repo.DeleteLike(like);
+            await _repo.DeleteLike(like);
             return NoContent();
         }
     }
