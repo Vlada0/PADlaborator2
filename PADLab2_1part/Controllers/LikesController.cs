@@ -40,7 +40,8 @@ namespace PADLab2_1part.Controllers
         public async Task<ActionResult> addLike(Like like)
         {
             await _repo.AddLike(like);
-            return NoContent();
+            return new ObjectResult(like) { StatusCode = StatusCodes.Status201Created };
+            //return CreatedResult;
         }
 
         [HttpDelete]

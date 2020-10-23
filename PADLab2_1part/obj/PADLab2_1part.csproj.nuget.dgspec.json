@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Vlada\\Documents\\PADLab2-master\\PADLab2_1part\\PADLab2_1part.csproj": {}
+    "C:\\Users\\Vlada\\Documents\\Visual Studio 2019\\PADlaborator2\\PADLab2_1part\\PADLab2_1part.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Vlada\\Documents\\PADLab2-master\\PADLab2_1part\\PADLab2_1part.csproj": {
+    "C:\\Users\\Vlada\\Documents\\Visual Studio 2019\\PADlaborator2\\PADLab2_1part\\PADLab2_1part.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Vlada\\Documents\\PADLab2-master\\PADLab2_1part\\PADLab2_1part.csproj",
+        "projectUniqueName": "C:\\Users\\Vlada\\Documents\\Visual Studio 2019\\PADlaborator2\\PADLab2_1part\\PADLab2_1part.csproj",
         "projectName": "PADLab2_1part",
-        "projectPath": "C:\\Users\\Vlada\\Documents\\PADLab2-master\\PADLab2_1part\\PADLab2_1part.csproj",
+        "projectPath": "C:\\Users\\Vlada\\Documents\\Visual Studio 2019\\PADlaborator2\\PADLab2_1part\\PADLab2_1part.csproj",
         "packagesPath": "C:\\Users\\Vlada\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Vlada\\Documents\\PADLab2-master\\PADLab2_1part\\obj\\",
+        "outputPath": "C:\\Users\\Vlada\\Documents\\Visual Studio 2019\\PADlaborator2\\PADLab2_1part\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Vlada\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -19,6 +19,13 @@ namespace PADLab2_1part.Data
         }
         public async Task AddLike(Like like)
         {
+            var likeCursor = await collectionLikes.FindAsync(_like => _like.ImageId == like.ImageId && _like.UserId == like.UserId);
+            var _like = await likeCursor.FirstOrDefaultAsync();
+            if(_like != null)
+            {
+                throw new ResourseAlreadyExistException("This user already liked this image");
+            }
+            like.Date = DateTime.Now.ToString();
             await collectionLikes.InsertOneAsync(like);
         }
 
@@ -27,7 +34,7 @@ namespace PADLab2_1part.Data
             var result = await collectionLikes.DeleteOneAsync(_like => _like.ImageId == like.ImageId && _like.UserId == like.UserId);
             if (result.DeletedCount == 0)
             {
-                throw new NotFoundException($"Like not found!");
+                throw new NotFoundException("Like not found!");
             }
             
         }

@@ -27,6 +27,10 @@ namespace PADLab2_1part.Validation.Extensions
             {
                 await HandleExceptionAsync(context, ex, HttpStatusCode.NotFound);
             }
+            catch(ResourseAlreadyExistException ex)
+            {
+                await HandleExceptionAsync(context, ex, HttpStatusCode.Conflict);
+            }
             catch(Exception e)
             {
                await HandleExceptionAsync(context, e, HttpStatusCode.InternalServerError);

@@ -25,7 +25,8 @@ namespace PADLab2_1part.Models
         public Guid ImageId { get; set; }
         
         [BsonElement("date")]
-        [Required]
+        //[Required]
+       // [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
         public string Date { get; set; }
     }
 }

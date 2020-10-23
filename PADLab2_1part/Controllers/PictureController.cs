@@ -30,7 +30,7 @@ namespace PADLab2_1part.Controllers
             return Ok(picturesItems.AsEnumerable()); 
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "GetPicture")]
         public async Task<ActionResult<Picture>> GetPicture(Guid id)
         {
             var picturesItem = await _repo.GetPictureById(id);
@@ -42,7 +42,7 @@ namespace PADLab2_1part.Controllers
         public async Task<ActionResult <Picture>> Post(Picture picture)
         {
             var _picture = await _repo.CreatePicture(picture);
-            return Ok(_picture);
+            return CreatedAtRoute(routeName: "GetPicture", routeValues: new {id = picture.Id}, value: picture);
         }
 
         [HttpPut]
