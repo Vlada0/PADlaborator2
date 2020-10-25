@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using PADLab2_1part.Data;
 using PADLab2_1part.Models;
+using PADLab2_1part.Services;
 
 namespace PADLab2_1part.Controllers
 {
@@ -15,17 +16,17 @@ namespace PADLab2_1part.Controllers
     public class PictureController : ControllerBase
     {
        
-        private readonly IPictureRepo _repo;
+        private readonly IPictureService _service;
 
-        public PictureController(IPictureRepo repo)
+        public PictureController(IPictureService service)
         {
-            _repo = repo;
+            _service = service;
         }
 
         [HttpGet]
         public async Task<ActionResult> GetPictures()
         {
-            var picturesItems = await _repo.GetPictures();
+            var picturesItems = await _service.GetPictures();
            // Console.WriteLine(picturesItems);
             return Ok(picturesItems.AsEnumerable()); 
         }
@@ -33,7 +34,7 @@ namespace PADLab2_1part.Controllers
         [HttpGet("{id}", Name = "GetPicture")]
         public async Task<ActionResult<Picture>> GetPicture(Guid id)
         {
-            var picturesItem = await _repo.GetPictureById(id);
+            var picturesItem = await _service.GetPictureById(id);
   
             return Ok(picturesItem);
         }
@@ -41,14 +42,14 @@ namespace PADLab2_1part.Controllers
         [HttpPost]
         public async Task<ActionResult <Picture>> Post(Picture picture)
         {
-            var _picture = await _repo.CreatePicture(picture);
+            var _picture = await _service.CreatePicture(picture);
             return CreatedAtRoute(routeName: "GetPicture", routeValues: new {id = picture.Id}, value: picture);
         }
 
         [HttpPut]
         public async Task<ActionResult<Picture>> Put(Picture picture)
         {
-            var _picture = await _repo.Update(picture);
+            var _picture = await _service.Update(picture);
 
             return Ok(_picture);
         }
@@ -57,7 +58,7 @@ namespace PADLab2_1part.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<Picture>> Delete(Guid id)
         {
-            await _repo.Delete(id);
+            await _service.Delete(id);
 
             return NoContent();
         }

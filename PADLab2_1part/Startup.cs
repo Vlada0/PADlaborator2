@@ -13,6 +13,7 @@ using MongoDB.Driver;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using PADLab2_1part.Data;
+using PADLab2_1part.Services;
 using PADLab2_1part.Validation.Extensions;
 
 namespace PADLab2_1part
@@ -45,6 +46,9 @@ namespace PADLab2_1part
                 
             services.AddScoped<IPictureRepo, PictureRepo>();
             services.AddScoped<ILikesRepo, LikesRepo>();
+            services.AddScoped<IUserRepo, UserRepo>();
+            services.AddScoped<ILikeService, LikeService>();
+            services.AddScoped<IPictureService, PictureService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

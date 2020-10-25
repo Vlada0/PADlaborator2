@@ -8,6 +8,7 @@ using PADLab2_1part.Data;
 using PADLab2_1part.Models;
 
 using Microsoft.Extensions.Logging;
+using PADLab2_1part.Services;
 
 namespace PADLab2_1part.Controllers
 {
@@ -15,39 +16,38 @@ namespace PADLab2_1part.Controllers
     [ApiController]
     public class LikesController : ControllerBase
     {
-        private readonly ILikesRepo _repo;
+        private readonly ILikeService _service;
 
-        public LikesController(ILikesRepo repo)
+        public LikesController(ILikeService service)
         {
-            _repo = repo;
+            _service = service;
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<LikeCount>> getLikes(Guid id)
         {
-            var likesItems = await _repo.GetNumberOfLikes(id);
+            var likesItems = await _service.GetNumberOfLikes(id);
             return Ok(likesItems);
         }
 
         [HttpGet("{id}/users")]
         public async Task<ActionResult<IEnumerable<User>>> getLikesUsers(Guid id)
         {
-            var likesItems = await _repo.GetLikesUsers(id);
+            var likesItems = await _service.GetLikesUsers(id);
             return Ok(likesItems.AsEnumerable());
         }
 
         [HttpPost]
         public async Task<ActionResult> addLike(Like like)
         {
-            await _repo.AddLike(like);
+            await _service.AddLike(like);
             return new ObjectResult(like) { StatusCode = StatusCodes.Status201Created };
-            //return CreatedResult;
         }
 
         [HttpDelete]
         public async Task<ActionResult> removeLike(Like like)
         {
-            await _repo.DeleteLike(like);
+            await _service.DeleteLike(like);
             return NoContent();
         }
     }
