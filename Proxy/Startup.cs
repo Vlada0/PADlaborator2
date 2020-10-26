@@ -26,7 +26,12 @@ namespace Proxy
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            
+            services.AddDistributedRedisCache(options =>
+            {
+                options.Configuration = "127.0.0.1:6379";
+                
+                options.InstanceName = "RedisCache";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -15,14 +15,19 @@ namespace Proxy.Middleware
     {
 		private static readonly HttpClient _httpClient = new HttpClient();
 		private readonly RequestDelegate _nextMiddleware;
+		private readonly IDistributedCache redisCache;
 
-		public ProxyMiddleware(RequestDelegate nextMiddleware)
+		public ProxyMiddleware(RequestDelegate nextMiddleware, IDistributedCache redisCache)
 		{
 			_nextMiddleware = nextMiddleware;
+			this.redisCache = redisCache;
 		}
 
 		public async Task Invoke(HttpContext context)
 		{
+			if (!(await ProcessCachedResponsePossibility(context)))
+			{
+
 				// If no requests found in cache - forward to the server
 				var targetUri = BuildTargetUri(context.Request);
 
@@ -36,6 +41,16 @@ namespace Proxy.Middleware
 
 						CopyFromTargetResponseHeaders(context, responseMessage);
 
+						await redisCache.SetAsync(context.Request.Path, await responseMessage.Content.ReadAsByteArrayAsync(), new DistributedCacheEntryOptions
+						{
+							AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(1)
+						});
+
+						/*await redisCache.SetAsync(
+								context.Request.Path,
+								await responseMessage.Content.ReadAsByteArrayAsync(), 
+								CancellationToken.None);*/
+
 						await ProcessResponseContent(context, responseMessage);
 					}
 
@@ -43,7 +58,7 @@ namespace Proxy.Middleware
 				}
 
 				await _nextMiddleware(context);
-			
+			}
 		}
 
 
@@ -71,6 +86,7 @@ namespace Proxy.Middleware
 		{
 			var requestMethod = context.Request.Method;
 
+
 			if (!HttpMethods.IsGet(requestMethod))
 			{
 				var streamContent = new StreamContent(context.Request.Body);
@@ -84,7 +100,9 @@ namespace Proxy.Middleware
 					requestMessage.Content?.Headers.TryAddWithoutValidation(header.Key, header.Value.ToArray());
 				}
 			}
+			requestMessage.Headers.Add("Origin", "http://localhost:49479");
 
+			//requestMessage.Content?.Headers.Add("Access-Control-Allow-Origin", "http://localhost:49479");
 			/*foreach (var header in context.Request.Headers)
 			{
 				//requestMessage.Content?.Headers.TryAddWithoutValidation(header.Key, header.Value.ToArray());
@@ -132,7 +150,23 @@ namespace Proxy.Middleware
 			return targetUri;
 		}
 
-		
+		// If we find some cached request - return it's response
+		private async Task<bool> ProcessCachedResponsePossibility(HttpContext context)
+		{
+			var cachedRequest = redisCache.GetString(context.Request.Path);
+
+			if (!string.IsNullOrEmpty(cachedRequest))
+			{
+				context.Response.StatusCode = (int)HttpStatusCode.AlreadyReported;
+				await context.Response.WriteAsync(cachedRequest, Encoding.UTF8);
+
+				return true;
+			}
+
+			return false;
+		}
+
+
 	}
 }
 

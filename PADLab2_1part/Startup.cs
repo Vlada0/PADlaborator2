@@ -37,6 +37,7 @@ namespace PADLab2_1part
                 var uri = s.GetRequiredService<IConfiguration>()["MongoUri"];
                 return new MongoClient(uri);
             });
+
             services.Configure<ApplicationOptions>(Configuration.GetSection("ApplicationOptions"));
             
             services.AddControllers()
