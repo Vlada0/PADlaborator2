@@ -56,7 +56,8 @@ namespace PADLab2_1part.Data
         public async Task<Picture> Update(Picture picture)
         {
             var result = await collectionPicture.ReplaceOneAsync(_picture => _picture.Id == picture.Id, picture);
-            if (result.ModifiedCount == 0)
+            
+            if (result.MatchedCount == 0)
             {
                 throw new NotFoundException("No picture with such Id");
             }
