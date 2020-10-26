@@ -18,3 +18,23 @@ C:\Users\Vlada\Documents\Visual Studio 2019\PADlaborator2\Proxy\obj\Release\netc
 C:\Users\Vlada\Documents\Visual Studio 2019\PADlaborator2\Proxy\obj\Release\netcoreapp3.1\Proxy.pdb
 C:\Users\Vlada\Documents\Visual Studio 2019\PADlaborator2\Proxy\obj\Release\netcoreapp3.1\Proxy.genruntimeconfig.cache
 C:\Users\Vlada\Documents\Visual Studio 2019\PADlaborator2\Proxy\obj\Release\netcoreapp3.1\Proxy.csprojAssemblyReference.cache
+D:\repos\PADlaborator2\Proxy\bin\Release\netcoreapp3.1\appsettings.Development.json
+D:\repos\PADlaborator2\Proxy\bin\Release\netcoreapp3.1\appsettings.json
+D:\repos\PADlaborator2\Proxy\bin\Release\netcoreapp3.1\Properties\launchSettings.json
+D:\repos\PADlaborator2\Proxy\bin\Release\netcoreapp3.1\Proxy.exe
+D:\repos\PADlaborator2\Proxy\bin\Release\netcoreapp3.1\Proxy.deps.json
+D:\repos\PADlaborator2\Proxy\bin\Release\netcoreapp3.1\Proxy.runtimeconfig.json
+D:\repos\PADlaborator2\Proxy\bin\Release\netcoreapp3.1\Proxy.runtimeconfig.dev.json
+D:\repos\PADlaborator2\Proxy\bin\Release\netcoreapp3.1\Proxy.dll
+D:\repos\PADlaborator2\Proxy\bin\Release\netcoreapp3.1\Proxy.pdb
+D:\repos\PADlaborator2\Proxy\obj\Release\netcoreapp3.1\Proxy.csprojAssemblyReference.cache
+D:\repos\PADlaborator2\Proxy\obj\Release\netcoreapp3.1\Proxy.AssemblyInfoInputs.cache
+D:\repos\PADlaborator2\Proxy\obj\Release\netcoreapp3.1\Proxy.AssemblyInfo.cs
+D:\repos\PADlaborator2\Proxy\obj\Release\netcoreapp3.1\Proxy.csproj.CoreCompileInputs.cache
+D:\repos\PADlaborator2\Proxy\obj\Release\netcoreapp3.1\Proxy.MvcApplicationPartsAssemblyInfo.cache
+D:\repos\PADlaborator2\Proxy\obj\Release\netcoreapp3.1\Proxy.RazorTargetAssemblyInfo.cache
+D:\repos\PADlaborator2\Proxy\obj\Release\netcoreapp3.1\staticwebassets\Proxy.StaticWebAssets.Manifest.cache
+D:\repos\PADlaborator2\Proxy\obj\Release\netcoreapp3.1\staticwebassets\Proxy.StaticWebAssets.xml
+D:\repos\PADlaborator2\Proxy\obj\Release\netcoreapp3.1\Proxy.dll
+D:\repos\PADlaborator2\Proxy\obj\Release\netcoreapp3.1\Proxy.pdb
+D:\repos\PADlaborator2\Proxy\obj\Release\netcoreapp3.1\Proxy.genruntimeconfig.cache
