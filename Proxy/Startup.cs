@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Proxy.LoadBalancing;
 using Proxy.Middleware;
 
 namespace Proxy
@@ -32,6 +33,14 @@ namespace Proxy
                 
                 options.InstanceName = "RedisCache";
             });
+
+           // services.Configure<>(Configuration.GetSection("ApplicationOptions"));
+            var appSettingsSection = Configuration.GetSection("LoadBalancingSettings");
+            services.Configure<LoadBalancingSettings>(appSettingsSection);
+
+            var appSettings = appSettingsSection.Get<LoadBalancingSettings>();
+
+            services.AddSingleton<LoadBalancer>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

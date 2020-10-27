@@ -55,12 +55,19 @@ namespace PADLab2_1part.Data
 
         public async Task<Picture> Update(Picture picture)
         {
-            var result = await collectionPicture.ReplaceOneAsync(_picture => _picture.Id == picture.Id, picture);
-            
-            if (result.MatchedCount == 0)
+            var pictureToUpdate = await collectionPicture.FindAsync(s => s.Id == picture.Id);
+            var pictureToUpdateValue = pictureToUpdate.FirstOrDefault();
+            if (pictureToUpdateValue == null)
             {
                 throw new NotFoundException("No picture with such Id");
             }
+            if(pictureToUpdateValue.Author != picture.Author)
+            {
+                throw new BadRequestException("You cannot change author Id");
+            }
+
+            await collectionPicture.ReplaceOneAsync(_picture => _picture.Id == picture.Id, picture);
+            
             return picture;
         }
     }

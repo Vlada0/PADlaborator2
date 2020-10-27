@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Caching.Distributed;
+using Proxy.LoadBalancing;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,14 +18,17 @@ namespace Proxy.Middleware
 		private readonly RequestDelegate _nextMiddleware;
 		private readonly IDistributedCache redisCache;
 
-		public ProxyMiddleware(RequestDelegate nextMiddleware, IDistributedCache redisCache)
+		private readonly LoadBalancer loadBalancer;
+		public ProxyMiddleware(RequestDelegate nextMiddleware, IDistributedCache redisCache, LoadBalancer loadBalancer)
 		{
 			_nextMiddleware = nextMiddleware;
 			this.redisCache = redisCache;
+			this.loadBalancer = loadBalancer;
 		}
 
 		public async Task Invoke(HttpContext context)
 		{
+			
 			if (!(await ProcessCachedResponsePossibility(context)))
 			{
 
@@ -41,16 +45,16 @@ namespace Proxy.Middleware
 
 						CopyFromTargetResponseHeaders(context, responseMessage);
 
-						await redisCache.SetAsync(context.Request.Path, await responseMessage.Content.ReadAsByteArrayAsync(), new DistributedCacheEntryOptions
-						{
-							AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(1)
-						});
-
-						/*await redisCache.SetAsync(
-								context.Request.Path,
-								await responseMessage.Content.ReadAsByteArrayAsync(), 
-								CancellationToken.None);*/
-
+                        if (isGetRequest(context))
+                        {
+							await redisCache.SetAsync(context.Request.Path, await responseMessage.Content.ReadAsByteArrayAsync(), new DistributedCacheEntryOptions
+							{
+								AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(1)
+							});
+							
+						}
+						loadBalancer.DecrementRequestCount(targetUri.OriginalString
+							.Substring(0, targetUri.OriginalString.IndexOf("/api")));
 						await ProcessResponseContent(context, responseMessage);
 					}
 
@@ -102,12 +106,6 @@ namespace Proxy.Middleware
 			}
 			requestMessage.Headers.Add("Origin", "http://localhost:49479");
 
-			//requestMessage.Content?.Headers.Add("Access-Control-Allow-Origin", "http://localhost:49479");
-			/*foreach (var header in context.Request.Headers)
-			{
-				//requestMessage.Content?.Headers.TryAddWithoutValidation(header.Key, header.Value.ToArray());
-				requestMessage.Content.Headers.Add(header.Key, header.Value.ToArray());
-			}*/
 		}
 
 		private void CopyFromTargetResponseHeaders(HttpContext context, HttpResponseMessage responseMessage)
@@ -144,7 +142,8 @@ namespace Proxy.Middleware
 
 			if (request.Path.StartsWithSegments("/api", out remainingPath))
 			{
-				targetUri = new Uri("http://localhost:64088/api" + remainingPath);
+				var address = loadBalancer.GetLeastLoaded(request);
+				targetUri = new Uri(address + "/api" + remainingPath);
 			}
 
 			return targetUri;
@@ -153,6 +152,10 @@ namespace Proxy.Middleware
 		// If we find some cached request - return it's response
 		private async Task<bool> ProcessCachedResponsePossibility(HttpContext context)
 		{
+            if (!isGetRequest(context))
+            {
+				return false;
+            }
 			var cachedRequest = redisCache.GetString(context.Request.Path);
 
 			if (!string.IsNullOrEmpty(cachedRequest))
@@ -164,6 +167,11 @@ namespace Proxy.Middleware
 			}
 
 			return false;
+		}
+
+		private bool isGetRequest(HttpContext context)
+        {
+			return HttpMethods.IsGet(context.Request.Method);
 		}
 
 
