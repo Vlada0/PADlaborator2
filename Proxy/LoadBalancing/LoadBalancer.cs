@@ -31,10 +31,12 @@ namespace Proxy.LoadBalancing
             if (!HttpMethods.IsGet(request.Method))
             {
 				server = servers.FirstOrDefault(s => s.isPrimary);
-				server.RequestCount++;
-				return server.Address;
 			}
-			server = servers.FirstOrDefault(s => s.isPrimary);
+            else
+            {
+				server = servers.FirstOrDefault(
+				s => s.RequestCount == servers.Min(m => m.RequestCount));
+			}
 			server.RequestCount++;
 			return server.Address;
 		}

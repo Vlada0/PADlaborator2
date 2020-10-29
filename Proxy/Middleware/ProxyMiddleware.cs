@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Caching.Distributed;
+using Microsoft.Extensions.Primitives;
 using Proxy.LoadBalancing;
 using System;
 using System.Collections.Generic;
@@ -41,17 +42,24 @@ namespace Proxy.Middleware
 
 					using (var responseMessage = await _httpClient.SendAsync(targetRequestMessage, HttpCompletionOption.ResponseHeadersRead, context.RequestAborted))
 					{
-						context.Response.StatusCode = (int)responseMessage.StatusCode;
+						var statusCode = (int)responseMessage.StatusCode;
+						context.Response.StatusCode = statusCode;
 
 						CopyFromTargetResponseHeaders(context, responseMessage);
 
-                        if (isGetRequest(context))
-                        {
-							await redisCache.SetAsync(context.Request.Path, await responseMessage.Content.ReadAsByteArrayAsync(), new DistributedCacheEntryOptions
+						if (isGetRequest(context) && statusCode >= 200 && statusCode <= 299)
+						{
+							StringValues type;
+
+							if (context.Request.Headers.TryGetValue("Accept", out type))
 							{
-								AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(1)
-							});
-							
+								await redisCache.SetAsync(context.Request.Path + type.First(), await responseMessage.Content.ReadAsByteArrayAsync(), new DistributedCacheEntryOptions
+								{
+									AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(1)
+								});
+							}
+
+
 						}
 						loadBalancer.DecrementRequestCount(targetUri.OriginalString
 							.Substring(0, targetUri.OriginalString.IndexOf("/api")));
@@ -156,8 +164,13 @@ namespace Proxy.Middleware
             {
 				return false;
             }
-			var cachedRequest = redisCache.GetString(context.Request.Path);
-
+			StringValues type;
+			
+			if(!context.Request.Headers.TryGetValue("Accept", out type))
+            {
+				return false;
+            }
+			var cachedRequest = redisCache.GetString(context.Request.Path + type.First());
 			if (!string.IsNullOrEmpty(cachedRequest))
 			{
 				context.Response.StatusCode = (int)HttpStatusCode.AlreadyReported;
