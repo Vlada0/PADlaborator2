@@ -8,10 +8,9 @@ using System.Threading.Tasks;
 
 namespace Proxy.LoadBalancing
 {
-    public class LoadBalancer
+    public class LoadBalancer: ILoadBalancer
     {
 		private List<Server> servers = new List<Server>();
-		//private static Dictionary<string, int> RequestsPerServer = new Dictionary<string, int>();
 
 		private readonly LoadBalancingSettings loadSettings;
 

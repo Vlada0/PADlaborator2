@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Primitives;
+using Proxy.Cache;
 using Proxy.LoadBalancing;
 using System;
 using System.Collections.Generic;
@@ -17,23 +18,22 @@ namespace Proxy.Middleware
     {
 		private static readonly HttpClient _httpClient = new HttpClient();
 		private readonly RequestDelegate _nextMiddleware;
-		private readonly IDistributedCache redisCache;
+		private readonly ICache _redisCache;
 
-		private readonly LoadBalancer loadBalancer;
-		public ProxyMiddleware(RequestDelegate nextMiddleware, IDistributedCache redisCache, LoadBalancer loadBalancer)
+		private readonly ILoadBalancer _loadBalancer;
+		public ProxyMiddleware(RequestDelegate nextMiddleware, ICache redisCache, ILoadBalancer loadBalancer)
 		{
-			_nextMiddleware = nextMiddleware;
-			this.redisCache = redisCache;
-			this.loadBalancer = loadBalancer;
+			this._nextMiddleware = nextMiddleware;
+			this._redisCache = redisCache;
+			this._loadBalancer = loadBalancer;
 		}
 
 		public async Task Invoke(HttpContext context)
 		{
 			
-			if (!(await ProcessCachedResponsePossibility(context)))
+			if (!(await _redisCache.ProcessCachedResponsePossibility(context)))
 			{
 
-				// If no requests found in cache - forward to the server
 				var targetUri = BuildTargetUri(context.Request);
 
 				if (targetUri != null)
@@ -53,15 +53,15 @@ namespace Proxy.Middleware
 
 							if (context.Request.Headers.TryGetValue("Accept", out type))
 							{
-								await redisCache.SetAsync(context.Request.Path + type.First(), await responseMessage.Content.ReadAsByteArrayAsync(), new DistributedCacheEntryOptions
-								{
-									AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(1)
-								});
+								var key = context.Request.Path + type.First();
+								var content = await responseMessage.Content.ReadAsByteArrayAsync();
+
+								await _redisCache.WriteToCache(key, content);
 							}
 
 
 						}
-						loadBalancer.DecrementRequestCount(targetUri.OriginalString
+						_loadBalancer.DecrementRequestCount(targetUri.OriginalString
 							.Substring(0, targetUri.OriginalString.IndexOf("/api")));
 						await ProcessResponseContent(context, responseMessage);
 					}
@@ -141,8 +141,6 @@ namespace Proxy.Middleware
 			//throw new Exception
 		}
 
-		// In case it's a call to the API - get the least loaded server address
-		// and create a URL for it's forwarding
 		private Uri BuildTargetUri(HttpRequest request)
 		{
 			Uri targetUri = null;
@@ -150,36 +148,11 @@ namespace Proxy.Middleware
 
 			if (request.Path.StartsWithSegments("/api", out remainingPath))
 			{
-				var address = loadBalancer.GetLeastLoaded(request);
+				var address = _loadBalancer.GetLeastLoaded(request);
 				targetUri = new Uri(address + "/api" + remainingPath);
 			}
 
 			return targetUri;
-		}
-
-		// If we find some cached request - return it's response
-		private async Task<bool> ProcessCachedResponsePossibility(HttpContext context)
-		{
-            if (!isGetRequest(context))
-            {
-				return false;
-            }
-			StringValues type;
-			
-			if(!context.Request.Headers.TryGetValue("Accept", out type))
-            {
-				return false;
-            }
-			var cachedRequest = redisCache.GetString(context.Request.Path + type.First());
-			if (!string.IsNullOrEmpty(cachedRequest))
-			{
-				context.Response.StatusCode = (int)HttpStatusCode.AlreadyReported;
-				await context.Response.WriteAsync(cachedRequest, Encoding.UTF8);
-
-				return true;
-			}
-
-			return false;
 		}
 
 		private bool isGetRequest(HttpContext context)
