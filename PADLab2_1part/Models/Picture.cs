@@ -24,7 +24,7 @@ namespace PADLab2_1part.Models
         public string Image { get; set; }
         [BsonElement("authorId")]
         [Required]
-        public Guid Author { get; set; }
+        public Guid? Author { get; set; }
         [BsonElement("description")]
         [Required]
         public string Description { get; set; }
