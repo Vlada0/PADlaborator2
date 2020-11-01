@@ -16,7 +16,7 @@ namespace Proxy.Middleware
 {
     public class ProxyMiddleware
     {
-		private static readonly HttpClient _httpClient = new HttpClient();
+		private readonly HttpClient _httpClient;
 		private readonly RequestDelegate _nextMiddleware;
 		private readonly ICache _redisCache;
 
@@ -26,6 +26,7 @@ namespace Proxy.Middleware
 			this._nextMiddleware = nextMiddleware;
 			this._redisCache = redisCache;
 			this._loadBalancer = loadBalancer;
+			_httpClient = new HttpClient();
 		}
 
 		public async Task Invoke(HttpContext context)
