@@ -3,6 +3,7 @@ using PADLab2_1part.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Intrinsics.X86;
 using System.Threading.Tasks;
 
 namespace PADLab2_1part.Services
@@ -11,16 +12,19 @@ namespace PADLab2_1part.Services
     {
         private IUserRepo userRepo;
         private ILikesRepo likeRepo;
+        private IPictureRepo pictureRepo;
 
-        public LikeService(ILikesRepo _likeRepo, IUserRepo _userRepo)
+        public LikeService(ILikesRepo _likeRepo, IUserRepo _userRepo, IPictureRepo _pictureRepo)
         {
             likeRepo = _likeRepo;
             userRepo = _userRepo;
+            pictureRepo = _pictureRepo;
         }
 
         public async Task AddLike(Like like)
         {
-            await userRepo.GetUserById(like.UserId);
+            await pictureRepo.GetPictureById(like.ImageId.Value);
+            await userRepo.GetUserById(like.UserId.Value);
             await likeRepo.AddLike(like);
         }
 

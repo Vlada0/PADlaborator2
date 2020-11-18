@@ -18,3 +18,75 @@ C:\Users\Vlada\source\repos\PADLab2_1part\PADLab2_1part\obj\Debug\netcoreapp3.1\
 C:\Users\Vlada\source\repos\PADLab2_1part\PADLab2_1part\obj\Debug\netcoreapp3.1\PADLab2_1part.dll
 C:\Users\Vlada\source\repos\PADLab2_1part\PADLab2_1part\obj\Debug\netcoreapp3.1\PADLab2_1part.pdb
 C:\Users\Vlada\source\repos\PADLab2_1part\PADLab2_1part\obj\Debug\netcoreapp3.1\PADLab2_1part.genruntimeconfig.cache
+D:\repos\PADlaborator2\PADLab2_1part\obj\Debug\netcoreapp3.1\PADLab2_1part.csprojAssemblyReference.cache
+D:\repos\PADlaborator2\PADLab2_1part\obj\Debug\netcoreapp3.1\PADLab2_1part.AssemblyInfoInputs.cache
+D:\repos\PADlaborator2\PADLab2_1part\obj\Debug\netcoreapp3.1\PADLab2_1part.AssemblyInfo.cs
+D:\repos\PADlaborator2\PADLab2_1part\obj\Debug\netcoreapp3.1\PADLab2_1part.csproj.CoreCompileInputs.cache
+D:\repos\PADlaborator2\PADLab2_1part\obj\Debug\netcoreapp3.1\PADLab2_1part.MvcApplicationPartsAssemblyInfo.cache
+D:\repos\PADlaborator2\PADLab2_1part\obj\Debug\netcoreapp3.1\PADLab2_1part.dll
+D:\repos\PADlaborator2\PADLab2_1part\obj\Debug\netcoreapp3.1\PADLab2_1part.pdb
+D:\repos\PADlaborator2\PADLab2_1part\bin\Debug\netcoreapp3.1\appsettings.Development.json
+D:\repos\PADlaborator2\PADLab2_1part\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
+D:\repos\PADlaborator2\PADLab2_1part\bin\Debug\netcoreapp3.1\appsettings.json
+D:\repos\PADlaborator2\PADLab2_1part\bin\Debug\netcoreapp3.1\PADLab2_1part.exe
+D:\repos\PADlaborator2\PADLab2_1part\bin\Debug\netcoreapp3.1\PADLab2_1part.deps.json
+D:\repos\PADlaborator2\PADLab2_1part\bin\Debug\netcoreapp3.1\PADLab2_1part.runtimeconfig.json
+D:\repos\PADlaborator2\PADLab2_1part\bin\Debug\netcoreapp3.1\PADLab2_1part.runtimeconfig.dev.json
+D:\repos\PADlaborator2\PADLab2_1part\bin\Debug\netcoreapp3.1\PADLab2_1part.dll
+D:\repos\PADlaborator2\PADLab2_1part\bin\Debug\netcoreapp3.1\PADLab2_1part.pdb
+D:\repos\PADlaborator2\PADLab2_1part\bin\Debug\netcoreapp3.1\DnsClient.dll
+D:\repos\PADlaborator2\PADLab2_1part\bin\Debug\netcoreapp3.1\System.Net.Http.Formatting.dll
+D:\repos\PADlaborator2\PADLab2_1part\bin\Debug\netcoreapp3.1\System.Web.Http.dll
+D:\repos\PADlaborator2\PADLab2_1part\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.JsonPatch.dll
+D:\repos\PADlaborator2\PADLab2_1part\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+D:\repos\PADlaborator2\PADLab2_1part\bin\Debug\netcoreapp3.1\MongoDB.Bson.dll
+D:\repos\PADlaborator2\PADLab2_1part\bin\Debug\netcoreapp3.1\MongoDB.Driver.dll
+D:\repos\PADlaborator2\PADLab2_1part\bin\Debug\netcoreapp3.1\MongoDB.Driver.Core.dll
+D:\repos\PADlaborator2\PADLab2_1part\bin\Debug\netcoreapp3.1\MongoDB.Libmongocrypt.dll
+D:\repos\PADlaborator2\PADLab2_1part\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+D:\repos\PADlaborator2\PADLab2_1part\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
+D:\repos\PADlaborator2\PADLab2_1part\bin\Debug\netcoreapp3.1\SharpCompress.dll
+D:\repos\PADlaborator2\PADLab2_1part\bin\Debug\netcoreapp3.1\runtimes\win\native\libzstd.dll
+D:\repos\PADlaborator2\PADLab2_1part\bin\Debug\netcoreapp3.1\runtimes\win\native\snappy32.dll
+D:\repos\PADlaborator2\PADLab2_1part\bin\Debug\netcoreapp3.1\runtimes\win\native\snappy64.dll
+D:\repos\PADlaborator2\PADLab2_1part\obj\Debug\netcoreapp3.1\PADLab2_1part.RazorTargetAssemblyInfo.cache
+D:\repos\PADlaborator2\PADLab2_1part\obj\Debug\netcoreapp3.1\PADLab2_1part.csproj.CopyComplete
+D:\repos\PADlaborator2\PADLab2_1part\obj\Debug\netcoreapp3.1\staticwebassets\PADLab2_1part.StaticWebAssets.Manifest.cache
+D:\repos\PADlaborator2\PADLab2_1part\obj\Debug\netcoreapp3.1\staticwebassets\PADLab2_1part.StaticWebAssets.xml
+D:\repos\PADlaborator2\PADLab2_1part\obj\Debug\netcoreapp3.1\PADLab2_1part.genruntimeconfig.cache
+C:\Users\Vlada\Documents\Visual Studio 2019\PADlaborator2\PADLab2_1part\bin\Debug\netcoreapp3.1\appsettings.Development.json
+C:\Users\Vlada\Documents\Visual Studio 2019\PADlaborator2\PADLab2_1part\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
+C:\Users\Vlada\Documents\Visual Studio 2019\PADlaborator2\PADLab2_1part\bin\Debug\netcoreapp3.1\appsettings.json
+C:\Users\Vlada\Documents\Visual Studio 2019\PADlaborator2\PADLab2_1part\bin\Debug\netcoreapp3.1\PADLab2_1part.exe
+C:\Users\Vlada\Documents\Visual Studio 2019\PADlaborator2\PADLab2_1part\bin\Debug\netcoreapp3.1\PADLab2_1part.deps.json
+C:\Users\Vlada\Documents\Visual Studio 2019\PADlaborator2\PADLab2_1part\bin\Debug\netcoreapp3.1\PADLab2_1part.runtimeconfig.json
+C:\Users\Vlada\Documents\Visual Studio 2019\PADlaborator2\PADLab2_1part\bin\Debug\netcoreapp3.1\PADLab2_1part.runtimeconfig.dev.json
+C:\Users\Vlada\Documents\Visual Studio 2019\PADlaborator2\PADLab2_1part\bin\Debug\netcoreapp3.1\PADLab2_1part.dll
+C:\Users\Vlada\Documents\Visual Studio 2019\PADlaborator2\PADLab2_1part\bin\Debug\netcoreapp3.1\PADLab2_1part.pdb
+C:\Users\Vlada\Documents\Visual Studio 2019\PADlaborator2\PADLab2_1part\bin\Debug\netcoreapp3.1\DnsClient.dll
+C:\Users\Vlada\Documents\Visual Studio 2019\PADlaborator2\PADLab2_1part\bin\Debug\netcoreapp3.1\System.Net.Http.Formatting.dll
+C:\Users\Vlada\Documents\Visual Studio 2019\PADlaborator2\PADLab2_1part\bin\Debug\netcoreapp3.1\System.Web.Http.dll
+C:\Users\Vlada\Documents\Visual Studio 2019\PADlaborator2\PADLab2_1part\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\Vlada\Documents\Visual Studio 2019\PADlaborator2\PADLab2_1part\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Users\Vlada\Documents\Visual Studio 2019\PADlaborator2\PADLab2_1part\bin\Debug\netcoreapp3.1\MongoDB.Bson.dll
+C:\Users\Vlada\Documents\Visual Studio 2019\PADlaborator2\PADLab2_1part\bin\Debug\netcoreapp3.1\MongoDB.Driver.dll
+C:\Users\Vlada\Documents\Visual Studio 2019\PADlaborator2\PADLab2_1part\bin\Debug\netcoreapp3.1\MongoDB.Driver.Core.dll
+C:\Users\Vlada\Documents\Visual Studio 2019\PADlaborator2\PADLab2_1part\bin\Debug\netcoreapp3.1\MongoDB.Libmongocrypt.dll
+C:\Users\Vlada\Documents\Visual Studio 2019\PADlaborator2\PADLab2_1part\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+C:\Users\Vlada\Documents\Visual Studio 2019\PADlaborator2\PADLab2_1part\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
+C:\Users\Vlada\Documents\Visual Studio 2019\PADlaborator2\PADLab2_1part\bin\Debug\netcoreapp3.1\SharpCompress.dll
+C:\Users\Vlada\Documents\Visual Studio 2019\PADlaborator2\PADLab2_1part\bin\Debug\netcoreapp3.1\runtimes\win\native\libzstd.dll
+C:\Users\Vlada\Documents\Visual Studio 2019\PADlaborator2\PADLab2_1part\bin\Debug\netcoreapp3.1\runtimes\win\native\snappy32.dll
+C:\Users\Vlada\Documents\Visual Studio 2019\PADlaborator2\PADLab2_1part\bin\Debug\netcoreapp3.1\runtimes\win\native\snappy64.dll
+C:\Users\Vlada\Documents\Visual Studio 2019\PADlaborator2\PADLab2_1part\obj\Debug\netcoreapp3.1\PADLab2_1part.csprojAssemblyReference.cache
+C:\Users\Vlada\Documents\Visual Studio 2019\PADlaborator2\PADLab2_1part\obj\Debug\netcoreapp3.1\PADLab2_1part.AssemblyInfoInputs.cache
+C:\Users\Vlada\Documents\Visual Studio 2019\PADlaborator2\PADLab2_1part\obj\Debug\netcoreapp3.1\PADLab2_1part.AssemblyInfo.cs
+C:\Users\Vlada\Documents\Visual Studio 2019\PADlaborator2\PADLab2_1part\obj\Debug\netcoreapp3.1\PADLab2_1part.csproj.CoreCompileInputs.cache
+C:\Users\Vlada\Documents\Visual Studio 2019\PADlaborator2\PADLab2_1part\obj\Debug\netcoreapp3.1\PADLab2_1part.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Vlada\Documents\Visual Studio 2019\PADlaborator2\PADLab2_1part\obj\Debug\netcoreapp3.1\PADLab2_1part.RazorTargetAssemblyInfo.cache
+C:\Users\Vlada\Documents\Visual Studio 2019\PADlaborator2\PADLab2_1part\obj\Debug\netcoreapp3.1\PADLab2_1part.csproj.CopyComplete
+C:\Users\Vlada\Documents\Visual Studio 2019\PADlaborator2\PADLab2_1part\obj\Debug\netcoreapp3.1\staticwebassets\PADLab2_1part.StaticWebAssets.Manifest.cache
+C:\Users\Vlada\Documents\Visual Studio 2019\PADlaborator2\PADLab2_1part\obj\Debug\netcoreapp3.1\staticwebassets\PADLab2_1part.StaticWebAssets.xml
+C:\Users\Vlada\Documents\Visual Studio 2019\PADlaborator2\PADLab2_1part\obj\Debug\netcoreapp3.1\PADLab2_1part.dll
+C:\Users\Vlada\Documents\Visual Studio 2019\PADlaborator2\PADLab2_1part\obj\Debug\netcoreapp3.1\PADLab2_1part.pdb
+C:\Users\Vlada\Documents\Visual Studio 2019\PADlaborator2\PADLab2_1part\obj\Debug\netcoreapp3.1\PADLab2_1part.genruntimeconfig.cache

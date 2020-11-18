@@ -42,7 +42,7 @@ namespace PADLab2_1part.Data
         public async Task<IEnumerable<Guid>> GetLikesUsers(Guid id)
         {
             var likesUser = await collectionLikes.FindAsync(s => s.ImageId == id);
-            return likesUser.ToEnumerable().Select(s=>s.UserId);
+            return likesUser.ToEnumerable().Select(s=>s.UserId.Value);
         }
 
         public async Task<LikeCount> GetNumberOfLikes(Guid id)

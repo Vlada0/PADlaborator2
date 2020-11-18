@@ -20,7 +20,7 @@ namespace PADLab2_1part.Services
 
         public async Task<Picture> CreatePicture(Picture picture)
         {
-            await userRepo.GetUserById(picture.Author);
+            await userRepo.GetUserById(picture.Author.Value);
             return await pictureRepo.CreatePicture(picture);
         }
 

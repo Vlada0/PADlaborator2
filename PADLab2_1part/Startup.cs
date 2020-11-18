@@ -13,7 +13,9 @@ using MongoDB.Driver;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using PADLab2_1part.Data;
+using PADLab2_1part.Infrastructure;
 using PADLab2_1part.Services;
+using PADLab2_1part.Utils;
 using PADLab2_1part.Validation.Extensions;
 
 namespace PADLab2_1part
@@ -32,9 +34,15 @@ namespace PADLab2_1part
         {
             services.AddSingleton<IMongoClient, MongoClient>(s =>
             {
+               // var settings = new MongoClientSettings { Server = new MongoServerAddress("localhost", 50003), ConnectionMode = ConnectionMode.Direct };
+               // return new MongoClient(settings);
+
                 var uri = s.GetRequiredService<IConfiguration>()["MongoUri"];
                 return new MongoClient(uri);
             });
+
+            services.Configure<ApplicationOptions>(Configuration.GetSection("ApplicationOptions"));
+            
             services.AddControllers()
                 .AddXmlDataContractSerializerFormatters()
                 .AddNewtonsoftJson(x =>
@@ -59,6 +67,7 @@ namespace PADLab2_1part
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseMiddleware<IPFilterMiddleware>();
             //app.ConfigureExceptionHandler();
 
             // Hook in the global error-handling middleware

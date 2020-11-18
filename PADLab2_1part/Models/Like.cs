@@ -18,11 +18,11 @@ namespace PADLab2_1part.Models
 
         [BsonElement("userId")]
         [Required]
-        public Guid UserId { get; set; }
+        public Guid? UserId { get; set; }
 
         [BsonElement("imageId")]
         [Required]
-        public Guid ImageId { get; set; }
+        public Guid? ImageId { get; set; }
         
         [BsonElement("date")]
         //[Required]

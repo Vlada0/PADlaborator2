@@ -54,7 +54,7 @@ namespace PADLab2_1part.Data
         public async Task<User> UpdateUser(User user)
         {
             var result = await collectionUser.ReplaceOneAsync(_user => _user.UserId == user.UserId, user);
-            if (result.ModifiedCount == 0)
+            if (result.MatchedCount== 0)
             {
                 throw new NotFoundException("No user with such Id");
             }

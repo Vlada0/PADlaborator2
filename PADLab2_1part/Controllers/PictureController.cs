@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -27,6 +28,7 @@ namespace PADLab2_1part.Controllers
         public async Task<ActionResult> GetPictures()
         {
             var picturesItems = await _service.GetPictures();
+            Thread.Sleep(20000);
            // Console.WriteLine(picturesItems);
             return Ok(picturesItems.AsEnumerable()); 
         }
@@ -42,6 +44,7 @@ namespace PADLab2_1part.Controllers
         [HttpPost]
         public async Task<ActionResult <Picture>> Post(Picture picture)
         {
+            Thread.Sleep(5000);
             var _picture = await _service.CreatePicture(picture);
             return CreatedAtRoute(routeName: "GetPicture", routeValues: new {id = picture.Id}, value: picture);
         }
